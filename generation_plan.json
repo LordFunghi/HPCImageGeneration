@@ -1,0 +1,22 @@
+{
+    "wiener dog|husky dog": 10,
+    "bloodhound dog|dalmation dog": 10,
+    "lion|tiger": 10,
+    "elephant|giraffe": 10,
+    "kangaroo|zebra": 10,
+    "goat|mountain goat": 10,
+    "bear|wolf": 10,
+    "owl|eagle": 10,
+    "horse|donkey": 10,
+    "monkey|chimpanzee": 10,
+    "chihuahua|golden retriever": 10,
+    "duck|goose": 10,
+    "flamingo|crane": 10,
+    "panda|koala": 10,
+    "parrot|macaw": 10,
+    "rabbit|squirrel": 10,
+    "cat|dog": 10,
+    "cow|buffalo": 10,
+    "penguin|seal": 10,
+    "fox|coyote": 10
+}

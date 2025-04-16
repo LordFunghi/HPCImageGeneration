@@ -1,0 +1,50 @@
+Bootstrap: docker
+From: python:3.10-slim
+
+%labels
+    Author: s497288
+    Version: 2.1
+    Description: Optimized container for FLUX.1-schnell inference on GPU clusters with TMPDIR fix.
+
+%post
+    # Create alternate tmp dir to avoid low space errors
+    mkdir -p /tmp_alt
+    export TMPDIR=/tmp_alt
+    export TMP=/tmp_alt
+
+    # Install essential build tools & system libs
+    apt-get update && apt-get install -y \
+        git gcc g++ \
+        libglib2.0-0 libsm6 libxrender1 libxext6 wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+    # Install Python packages (optimized set)
+    pip install --no-cache-dir \
+        torch \
+        diffusers \
+        transformers \
+        accelerate \
+        sentencepiece \
+        pillow \
+        protobuf \
+        nltk
+
+    # Download NLTK WordNet corpus
+    python3 -m nltk.downloader wordnet
+
+    # Create app dir and copy script
+    mkdir -p /app
+    cp /scifiles/model_test.py /app/model_test.py
+    chmod +x /app/model_test.py
+
+%files
+    model_test.py /scifiles/model_test.py
+
+%environment
+    export LC_ALL=C
+    export LANG=C
+    export TRANSFORMERS_CACHE=/tmp/huggingface
+    export HF_HUB_DISABLE_SYMLINKS_WARNING=1
+
+%runscript
+    exec python /app/model_test.py "$@"

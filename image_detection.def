@@ -1,0 +1,24 @@
+Bootstrap: docker
+From: ultralytics/ultralytics:latest
+
+%labels
+    Author s497288
+    Purpose YOLO + OpenCV detection using prebuilt ultralytics image
+
+%post
+    # Just add system libs for OpenCV visualization support if needed
+    apt-get update && apt-get install -y \
+        libgl1 \
+        libglib2.0-0 \
+        && rm -rf /var/lib/apt/lists/*
+
+%environment
+    export PYTHONUNBUFFERED=1
+    export OMP_NUM_THREADS=1
+
+%files
+    image_detection.py /app/image_detection.py
+
+%runscript
+    echo "Running YOLO inference script..."
+    exec python3 /app/image_detection.py "$@"
