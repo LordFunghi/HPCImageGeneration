@@ -36,9 +36,12 @@ apptainer run --nv \
   --bind /home/s497288/lab-project/images:/images \
   --bind /home/s497288/lab-project/results:/results \
   ~/lab-project/image_detection_sandbox \
-  --images-dir /images \
-  --results-dir /results \
-  --model-path /yolo11x.pt
+  --images /images \
+  --results /results \
+  --model /yolo11x.pt \
+  --conf 0.25 \
+  --threshold-from-bottom 80 \
+  --salvage-margin 10
 ```
 
 ---
@@ -102,15 +105,21 @@ apptainer run --nv \
   --bind /home/s497288/lab-project/images:/images \
   --bind /home/s497288/lab-project/results:/results \
   ~/lab-project/image_detection_sandbox \
-  --images-dir /images \
-  --results-dir /results \
-  --model-path /yolo11x.pt
+  --images /images \
+  --results /results \
+  --model /yolo11x.pt \
+  --conf 0.25 \
+  --threshold-from-bottom 80 \
+  --salvage-margin 10
 ```
 
-| Argument         | Description |
-|------------------|-------------|
-| `--images-dir`   | Directory of images to run object detection on (typically `/images`). |
-| `--results-dir`  | Directory to save detection results (e.g., bounding boxes, labels). |
-| `--model-path`   | Path to the pretrained YOLOv11x weights file. |
+| Argument                  | Description |
+|---------------------------|-------------|
+| `--images`                | Directory with input images. |
+| `--results`               | Directory to save annotated images and the summary plot. |
+| `--model`                 | Path to your YOLO model (`.pt` file). |
+| `--conf`                  | Confidence threshold for detections (default: 0.25). |
+| `--threshold-from-bottom` | Threshold distance (pixels) from the bottom of the image. |
+| `--salvage-margin`        | Margin in pixels within which crossing is considered salvageable. |
 
 ---
