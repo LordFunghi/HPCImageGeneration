@@ -114,6 +114,3 @@ apptainer run --nv \
 | `--model-path`   | Path to the pretrained YOLOv11x weights file. |
 
 ---
-
-Let us know if you'd like sample outputs, logs, or Slurm integration scripts!
-
